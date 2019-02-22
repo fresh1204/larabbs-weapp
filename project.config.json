@@ -1,13 +1,16 @@
 {
-  "description": "larvavelbbs weapp project",
-  "setting": {
-    "urlCheck": true,
-    "es6": false,
-    "postcss": false,
-    "minified": false
-  },
-  "compileType": "miniprogram",
-  "appid": "wxb7e35269ee2cfe06",
-  "projectname": "laravelbbs-weapp",
-  "miniprogramRoot": "./dist"
+	"description": "larvavelbbs weapp project",
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"appid": "wxb7e35269ee2cfe06",
+	"projectname": "laravelbbs-weapp",
+	"miniprogramRoot": "dist/",
+	"condition": {}
 }
