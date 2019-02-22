@@ -44,7 +44,7 @@
 
 <script>
   import wepy from 'wepy'
-  import api from '@/utils/api'
+  import api from '@/utils/api' // 引入 api.js 文件
 
   export default class Login extends wepy.page {
     config = {

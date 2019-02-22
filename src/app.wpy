@@ -31,54 +31,53 @@ page{
 }
 </style>
 
-
 <script>
-import wepy from 'wepy'
-import 'wepy-async-function'
+  import wepy from 'wepy'
+  import 'wepy-async-function'
 
-export default class extends wepy.app {
-  config = {
-    pages: [
-      'pages/index',
-      'pages/user',
-      'pages/auth/login'
-    ],
-    window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
-    },
-    tabBar: {
-      list: [{
-        pagePath: 'pages/index',
-        text: '首页',
-        iconPath: 'images/index.png',
-        selectedIconPath: 'images/index_selected.png'
-      }, {
-        pagePath: 'pages/user',
-        text: '我的',
-        iconPath: 'images/user.png',
-        selectedIconPath: 'images/user_selected.png'
-      }],
-      color: '#707070',
-      selectedColor: '#00b5ad'
+  export default class extends wepy.app {
+    config = {
+      pages: [
+        'pages/index',
+        'pages/user',
+        'pages/auth/login'
+      ],
+      window: {
+        backgroundTextStyle: 'light',
+        navigationBarBackgroundColor: '#fff',
+        navigationBarTitleText: 'WeChat',
+        navigationBarTextStyle: 'black'
+      },
+      tabBar: {
+        list: [{
+          pagePath: 'pages/index',
+          text: '首页',
+          iconPath: 'images/index.png',
+          selectedIconPath: 'images/index_selected.png'
+        }, {
+          pagePath: 'pages/user',
+          text: '我的',
+          iconPath: 'images/user.png',
+          selectedIconPath: 'images/user_selected.png'
+        }],
+        color: '#707070',
+        selectedColor: '#00b5ad'
+      }
+    }
+
+    constructor () {
+      super()
+      this.use('requestfix')
+      this.use('promisify')
+    }
+
+    onLaunch() {
+      // WePY 中使用 Promise
+      /*
+      wepy.login().then(res => {
+        console.log('login:', res)
+      })
+      */
     }
   }
-
-  constructor () {
-    super()
-    this.use('requestfix')
-    this.use('promisify')
-  }
-
-  onLaunch() {
-    // WePY 中使用 Promise
-    /*
-    wepy.login().then(res => {
-      console.log('login:', res)
-    })
-    */
-  }
-}
 </script>
