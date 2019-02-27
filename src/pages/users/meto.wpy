@@ -22,7 +22,7 @@
 	 <view class="page__bd" >
       <view class="weui-cells weui-cells_after-title">
         <!-- 已登录 -->
-        <navigator class="weui-cell" wx:if="{{ user }}" url="/pages/users/edit">
+        <navigator class="weui-cell" wx:if="{{ user }}" url>
           <view class="weui-cell__hd avatar-wrap">
             <image class="avatar" src="{{ user.avatar }}"/>
           </view>
@@ -73,7 +73,7 @@
   import wepy from 'wepy'
   import api from '@/utils/api'
 
-  export default class UserMe extends wepy.page {
+  export default class User extends wepy.page {
     config = {
       navigationBarTitleText: '我的'
     }
@@ -102,16 +102,11 @@
       this.$apply()
     }
     methods = {
-    	// 退出登录方法
+    	// 退出
     	async logout (e) {
     		try {
     			let logoutResponse = await api.logout()
-          let expired = wepy.getStorageSync('access_token_expired_at')
-          
-          if(new Date().getTime() > expired){
-            wepy.clearStorage()
-          }
-          // 退出成功清除信息
+    			// 退出成功清除信息
     			if (logoutResponse.statusCode === 204) {
     				//this.loggedIn = false
     				this.user = null

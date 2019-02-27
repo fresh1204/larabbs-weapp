@@ -5,14 +5,14 @@ const host = 'http://laravelbbs.test/api'
 
 // 普通请求 (封装请求方法,使用箭头函数来定义方法)
 const request = async (options, showLoading = true) => {
-	// 简化开发，如果传入字符串则转换成 对象
+  // 简化开发，如果传入字符串则转换成 对象
   if (typeof options === 'string') {
     options = {
       url: options
     }
   }
 
-	// 显示加载中(默认在请求之前显示加载中)
+  // 显示加载中(默认在请求之前显示加载中)
   if (showLoading) {
     wepy.showLoading({'title': '加载中'})
   }
@@ -30,18 +30,19 @@ const request = async (options, showLoading = true) => {
   let response = await wepy.request(options)
 
   if (showLoading) {
-		// 隐藏加载中
+	// 隐藏加载中
     wepy.hideLoading()
   }
 
-	// 服务器异常后给与提示
+  // 服务器异常后给与提示
   if (response.statusCode === 500) {
 		// 显示一个模态框
-    wepy.showModel({
+    wepy.showModal({
       title: '提示',
       content: '服务器错误，请联系管理员或重试'
     })
   }
+
   return response
 }
 
@@ -74,6 +75,7 @@ const login = async (params = {}) => {
 const logout = async (params = {}) => {
   // 从缓存中取出 Token
   let accessToken = wepy.getStorageSync('access_token')
+
   // 调用删除 Token 接口，让 Token 失效
   let logoutResponse = await wepy.request({
     url: host + '/' + 'authorizations/current',
@@ -82,6 +84,8 @@ const logout = async (params = {}) => {
       'Authorization': 'Bearer ' + accessToken
     }
   })
+  
+  //console.log(logoutResponse.data.message)
 
 	// 调用接口成功则清空缓存
   if (logoutResponse.statusCode === 204) {
@@ -157,6 +161,30 @@ const authRequest = async (options, showLoading = true) => {
   return request(options, showLoading)
 }
 
+//封装上传方法
+const updateFile = async (options = {}) => {
+	// 显示loading
+	wepy.showLoading({title: '上传中'})
+
+	// 获取 token
+	let accessToken = await getToken()
+
+	// 拼接url
+	options.url = host + '/' + options.url
+	let header = options.header || {}
+	// 将 token 设置在 header 中
+	header.Authorization = 'Bearer ' + accessToken
+	options.header = header
+
+	// 上传文件
+	let response = await wepy.uploadFile(options)
+
+	// 隐藏 loading
+  	wepy.hideLoading()
+
+  	return response
+}
+
 /*
  * 抛出了定义的这两个方法，这样只需要 import api from '@/utils/api' 引入 api.js 文件后，
  * 就可以通过 api.request 和 api.login 来调用方法了
@@ -166,5 +194,6 @@ export default {
   login,
   refreshToken,
   authRequest,
-  logout
+  logout,
+  updateFile
 }
