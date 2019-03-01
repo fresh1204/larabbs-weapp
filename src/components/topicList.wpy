@@ -22,6 +22,7 @@
   float: right;
 }
 </style>
+
 <template>
  <view class="weui-panel weui-panel_access">
     <view class="weui-panel__bd">
@@ -48,12 +49,14 @@
     </view>
   </view>
 </template>
+
 <script>
   /* eslint-disable */
   import wepy from 'wepy'
   import util from '@/utils/util'
   import api from '@/utils/api'
 
+  // 话题列表组件
   export default class TopicList extends wepy.component{
     data = {
       // 话题数据
@@ -110,6 +113,8 @@
 
           this.$apply()
         }
+
+        return topicsResponse
       }catch(err){
         console.log(err)
         wepy.showModal({
@@ -126,12 +131,12 @@
         return
       }
 
-      // 开始请求之前设置 isLoading 为true
+      // 开始请求之前,设置 isLoading 为true
       this.isLoading = true
       this.syncData.page = this.syncData.page + 1
       await this.getTopics()
 
-      // 开始结束后设置 isLoading 为 false
+      // 开始结束后,设置 isLoading 为 false
       this.isLoading = false
       this.$apply()
     }
