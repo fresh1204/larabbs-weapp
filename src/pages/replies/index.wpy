@@ -1,3 +1,4 @@
+<!--
 <style lang="less">
 .replyer-avatar {
   padding: 4px;
@@ -35,12 +36,16 @@
     </view>
   </view>
 </template>
+-->
 
 <script>
   /* eslint-disable */
   import wepy from 'wepy'
+  /*
   import util from '@/utils/util'
   import api from '@/utils/api'
+  */
+  import replyMixin from '@/mixins/replyMixin'
 
   export default class ReplyIndex extends wepy.page{
   	config = {
@@ -50,6 +55,7 @@
       	navigationBarTitleText: '回复列表'
   	}
   	data = {
+  		/*
   		// 回复数据
   		replies: [],
   		// 是否有更多数据
@@ -60,7 +66,12 @@
   		page: 1,
   		// 话题 id
   		topicId: 0
+  		*/
+  		requestData: {}
   	}
+  	// 使用 replyMixin
+  	mixins = [replyMixin]
+  	/*
   	// 获取话题回复
   	async getReplies (reset = false) {
   		try{
@@ -102,14 +113,16 @@
   			})
   		}
   	}
-
-  	onLoad(options){
+	*/
+  	async onLoad(options){
   		// 获取 URL 参数中的 话题id,从而获取对应话题的回复数据
-  		this.topicId = options.topic_id
+  		//this.topicId = options.topic_id
+  		this.requestData.url = 'topics/' + options.topic_id + '/replies'
   		this.getReplies()
   	}
 
-  	// 下来刷新
+  	/*
+  	// 下啦刷新
   	async onPullDownRefresh(){
   		this.noMoreData = false
   		this.page = 1
@@ -131,5 +144,6 @@
   		this.isLoading = false
   		this.$apply()
   	}
+  	*/
   }
 </script>
