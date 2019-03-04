@@ -49,7 +49,8 @@ page{
         'pages/auth/login',
         'pages/auth/register',
         'pages/replies/index',
-        'pages/replies/userIndex'
+        'pages/replies/userIndex',
+        'pages/replies/create'
       ],
       window: {
         backgroundTextStyle: 'light',
