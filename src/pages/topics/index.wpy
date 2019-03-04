@@ -139,6 +139,7 @@ class="weui-cell weui-cell_access {{ currentCategory.id == category.id ? 'catego
   import api from '@/utils/api'
   import util from '@/utils/util'
   import topicList from '@/components/topicList'
+  import unreadCount from '@/mixins/unreadCount'
 
   export default class TopicIndex extends wepy.page {
     config = {
@@ -174,6 +175,9 @@ class="weui-cell weui-cell_access {{ currentCategory.id == category.id ? 'catego
         return this.currentCategory.id || 0
       }
     }
+
+    // 使用 unreadCount
+    mixins = [unreadCount]
     //获取话题数据
     /* 由于使用了 topiclist 组件,就不需要这个获取话题数据的方法了
     async getTopics(page = 1,reset = false){
