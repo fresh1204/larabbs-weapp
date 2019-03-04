@@ -50,7 +50,8 @@ page{
         'pages/auth/register',
         'pages/replies/index',
         'pages/replies/userIndex',
-        'pages/replies/create'
+        'pages/replies/create',
+        'pages/notifications/index'
       ],
       window: {
         backgroundTextStyle: 'light',
@@ -143,7 +144,7 @@ page{
       })
       */
 
-      // 小程序启动，调用一起获取未读消息数
+      // 小程序启动，调用一次获取未读消息数
       this.updateUnreadCount()
       // 每隔 60 秒，调用一次获取未读消息数
       setInterval(()=>{
