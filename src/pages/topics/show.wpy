@@ -227,5 +227,25 @@ page{
     			this.getTopic(this.topic.id)
     		})
     	}
+
+    	// 页面分享
+    	onShareAppMessage(res){
+    		// console.log(222)
+    		return {
+    			// 标题是话题标题
+    			title: this.topic.title,
+    			// 路径为话题详情路径
+    			path: '/pages/topics/show?id=' + this.topic.id,
+
+    			success: function(res){
+    				// 转发成功
+    				console.log(res)
+    			},
+    			fail: function(res){
+    				// 转发失败
+          			console.log(res)
+    			}
+    		}
+    	}
   	}
 </script>
