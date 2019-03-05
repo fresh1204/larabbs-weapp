@@ -109,13 +109,14 @@ export default class ReplyMixin extends wepy.mixin{
 		}
 	}
 
-	// 控制是否能删除按钮
+	// 控制是否能删除按钮 只能删除自己发布的回复
 	canDelete(user,reply){
 		if(!user){
 			return
 		}
 
-		return user.id === reply.user_id
+		// 自己才能删除自己发布的回复 或 有管理内容权限
+		return (user.id === reply.user_id) || this.$parent.can('manage_contents')
 	}
 
 	// 下拉刷新

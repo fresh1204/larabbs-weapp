@@ -48,6 +48,7 @@
 </template>
 
 <script>
+  /* eslint-disable */
   import wepy from 'wepy'
   import api from '@/utils/api' // 引入 api.js 文件
 
@@ -103,6 +104,8 @@
 
           // 201 为登录正确，返回上一页
           if (authResponse.statusCode === 201) {
+            // 获取用户权限
+            this.$parent.getPerms() 
             wepy.navigateBack()
           }
         } catch (err) {
@@ -121,6 +124,8 @@
 
         // 登录成功返回上一页
         if (authResponse.statusCode === 201) {
+          // 获取用户权限
+          this.$parent.getPerms() 
           wepy.navigateBack()
         }
       } catch (err) {

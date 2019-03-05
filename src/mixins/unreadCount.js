@@ -8,7 +8,7 @@ export default class unreadCount extends wepy.mixin{
     	unreadCount: 0
 	}
 
-	// 页面显示 开启轮询，每 30 秒执行一次
+	// 页面显示 开启轮询，每 30 秒执行一次 (轮训提示未读消息数)
 	onShow(){
 		this.updateUnreadCount()
 		this.interval = setInterval(()=>{
